@@ -89,13 +89,7 @@ static int MODPLUG_Load(void)
         FUNCTION_LOADER(ModPlug_SetSettings, void (*)(const ModPlug_Settings* settings))
         FUNCTION_LOADER(ModPlug_SetMasterVolume, void (*)(ModPlugFile* file,unsigned int cvol))
         FUNCTION_LOADER(ModPlug_GetName, const char* (*)(ModPlugFile* file))
-#ifdef MODPLUG_DYNAMIC
-        modplug.ModPlug_Tell = (int (*)(ModPlugFile* file)) SDL_LoadFunction(modplug.handle, "ModPlug_Tell");
-#elif defined(MODPLUG_HAS_TELL)
-        modplug.ModPlug_Tell = ModPlug_Tell;
-#else
         modplug.ModPlug_Tell = NULL;
-#endif
     }
     ++modplug.loaded;
 
@@ -293,12 +287,7 @@ static int MODPLUG_Seek(void *context, double position)
 
 static double MODPLUG_Tell(void *context)
 {
-    if (modplug.ModPlug_Tell) {
-        MODPLUG_Music *music = (MODPLUG_Music *)context;
-        return (double)(modplug.ModPlug_Tell(music->file)) / 1000.0;
-    } else {
-        return -1.0;
-    }
+    return -1.0;
 }
 
 /* Return music duration in seconds */
