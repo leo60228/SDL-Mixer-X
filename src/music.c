@@ -25,6 +25,7 @@
 #include "SDL_mixer.h"
 #include "mixer.h"
 #include "music.h"
+#include "compat.h"
 
 #include "music_cmd.h"
 #include "music_wav.h"

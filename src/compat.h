@@ -24,11 +24,8 @@
 
 #include "SDL.h"
 
-#if SDL_VERSION_ATLEAST(2,0,12)
-#define HAVE_SDL_STRTOKR
-#else
+#undef HAVE_SDL_STRTOKR
 #define SDL_strtokr _MIX_strtokr
 extern char *SDL_strtokr(char *s1, const char *s2, char **saveptr);
-#endif
 
 #endif /* COMPAT_H_ */
